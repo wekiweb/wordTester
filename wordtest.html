@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<title>Word Test Program</title>
+	<meta name="Author" content="cartes" />
+
+<style type="text/css">
+/*<![CDATA[*/
+body { font-family: 'Georgia', serif; }
+
+p { margin: 0.5em 0; }
+
+#curr_word { font-size: 4em; }
+
+#corres_words { font-family: 'MalgunGothic', sans-serif; }
+
+#btn_answer, #btn_next { padding: 1em; }
+/*]]>*/
+</style>
+<script type="text/javascript" src="wordlist.js"></script>
+</head>
+
+<body>
+<h1>Word Test Program</h1>
+<p id="curr_word">
+WORD
+</p>
+<p id="corres_words">corresponding words?</p>
+<p>
+	<input type="button" value="Answer" id="btn_answer" /> <input type="button" value="Next" id="btn_next" />
+</p>
+<script type="text/javascript">
+var wordNum = Math.floor(Math.random() * wordlist.length);
+
+function showCorres()
+{
+	var corres = document.getElementById("corres_words").firstChild;
+
+	if(corres.nodeValue == "corresponding words?")
+		corres.nodeValue = wordlist[wordNum][1];
+	else
+		corres.nodeValue = "corresponding words?";
+}
+function showCurr()
+{
+	var currWord = document.getElementById("curr_word").firstChild;
+	currWord.nodeValue = wordlist[wordNum][0];
+}
+
+function showNext()
+{
+	wordNum = Math.floor(Math.random() * wordlist.length);
+	showCurr();
+	var corres = document.getElementById("corres_words").firstChild;
+	corres.nodeValue = "corresponding words?";
+}
+
+window.onload = function() {
+	showCurr();
+	document.getElementById("btn_answer").onclick = showCorres;
+	document.getElementById("btn_next").onclick = showNext;
+};
+</script>
+</body>
+</html>
